@@ -27,7 +27,7 @@
 		"@doddle/http": "^2.2.4",
 		"ali-oss": "^6.1.1",
 		"antd": "^3.26.3",
-		"antd-doddle": "^1.4.2-beta.1",
+		"antd-doddle": "^1.4.2-beta.2",
 		"copy-to-clipboard": "^3.3.1",
 		"dva": "^2.4.1",
 		"react": "^16.13.1",
