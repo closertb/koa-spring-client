@@ -36,6 +36,6 @@
 	},
 	"webpack": {
 		"useAntd": false,
-		"useAnalyse": false
+		"useAnalyse": true
 	}
 }
