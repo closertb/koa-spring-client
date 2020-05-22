@@ -34,7 +34,7 @@ export default {
       const ossKey = yield call(services.getUploadToken, {
         ossKey: cookie.get('ossKey')
       });
-      oss.create(ossKey);
+      yield oss.create(ossKey);
       yield put('getList');
     },
     * getList({ payload }, { select, call, update }) {

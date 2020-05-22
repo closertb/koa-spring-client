@@ -1,4 +1,3 @@
-import OSS from 'ali-oss';
 import { bind } from 'antd-doddle/decorator';
 
 export default class MyOss {
@@ -7,13 +6,13 @@ export default class MyOss {
   }
 
   // 初始化Client
-  create({ accessKeyId, accessKeySecret }) {
-    this.client = new OSS({
+  async create({ accessKeyId, accessKeySecret }) {
+    this.client = await import('ali-oss').then(({ default: OSS }) => new OSS({
       bucket: 'doddle',
       region: 'oss-cn-beijing',
       accessKeyId,
       accessKeySecret,
-    });
+    }));
   }
 
   @bind
