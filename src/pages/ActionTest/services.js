@@ -20,7 +20,6 @@ export function upload(param) {
 }
 
 export function updateCache() {
-  console.log('up');
   return postAdmin('/arcticle/updateCache', {});
 }
 

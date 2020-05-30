@@ -23,7 +23,6 @@ export default ({
       yield call(upload, payload);
     },
     * updateCache({ payload }, { call }) {
-      console.log('update');
       yield call(updateCache, payload);
     },
     * clearCache({ payload }, { call }) {
