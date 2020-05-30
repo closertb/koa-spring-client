@@ -18,3 +18,12 @@ export function upload(param) {
     }
   });
 }
+
+export function updateCache() {
+  console.log('up');
+  return postAdmin('/arcticle/updateCache', {});
+}
+
+export function clearCache(param) {
+  return postAdmin('/arcticle/clearCache', param);
+}

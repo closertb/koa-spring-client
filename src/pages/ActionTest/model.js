@@ -1,5 +1,5 @@
 import cookie from 'js-cookie';
-import { login, upload } from './services';
+import { login, upload, updateCache, clearCache } from './services';
 
 export default ({
   namespace: 'index',
@@ -21,6 +21,13 @@ export default ({
     },
     * upload({ payload }, { call }) {
       yield call(upload, payload);
+    },
+    * updateCache({ payload }, { call }) {
+      console.log('update');
+      yield call(updateCache, payload);
+    },
+    * clearCache({ payload }, { call }) {
+      yield call(clearCache, payload);
     },
     * login({ payload }, { call, update }) {
       const user = yield call(login, payload);
