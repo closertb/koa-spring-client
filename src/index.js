@@ -1,9 +1,9 @@
 import dva from 'dva';
 import hook from '@doddle/dva';
-import { setPaginationParam } from 'antd-doddle';
+// import { setPaginationParam } from 'antd-doddle';
 import { setApp } from 'antd-doddle/decorator';
 import 'antd/dist/antd.css';
-import 'antd-doddle/dist/index.css';
+// import 'antd-doddle/dist/index.css';
 import './configs/extendTypes';
 import './style/index.less';
 
@@ -14,10 +14,10 @@ const app = dva({
   }
 });
 
-setPaginationParam({
-  PN: 'pn',
-  PS: 'ps'
-});
+// setPaginationParam({
+//   PN: 'pn',
+//   PS: 'ps'
+// });
 
 hook({ app });
 

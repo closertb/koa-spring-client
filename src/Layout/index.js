@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Route, Switch, Link } from 'react-router-dom'; // HashRouter as Router,
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu } from 'antd';
 import { connect } from 'dva';
 import HeaderMap from '../components/HeaderMap';
 import menus from '../configs/menu';
@@ -48,7 +48,6 @@ export default class Layer extends PureComponent {
             {Object.keys(menus).map(key => (
               <Menu.Item key={key}>
                 <Link to={menus[key].path}>
-                  <Icon type={menus[key].icon || 'user'} />
                   <span>{menus[key].name}</span>
                 </Link>
               </Menu.Item>))

@@ -1,5 +1,7 @@
 import React from 'react';
-import { Menu, Icon, Dropdown } from 'antd';
+import { Menu, Dropdown } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+
 import styles from './index.less';
 
 const MenuItem = Menu.Item;
@@ -20,7 +22,7 @@ function HeaderBtns({ username, onLogout }) {
     <div className={styles.controls}>
       <Dropdown overlay={getMenu()} className={styles.btns}>
         <a className="ant-dropdown-link">
-          <Icon type="user" />
+          <UserOutlined />
           <span className={styles.username}>{username}</span>
         </a>
       </Dropdown>
