@@ -40,7 +40,6 @@ function deepMap(children, extendProps, mapFields) {
 }
 
 function FormGroup(constProps, ref) {
-  const [form] = useForm();
   const { formItemLayout = layout, containerName, required, fields = [],
     Wrapper = WrapperDefault, withWrap = false, dynamicParams, children, datas, ...others } = constProps;
 
