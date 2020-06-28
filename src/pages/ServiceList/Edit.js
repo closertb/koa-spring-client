@@ -1,13 +1,11 @@
 import React from 'react';
-import { Form } from 'antd';
 import { HModal, FormGroup } from 'antd-doddle';
 import { editFields } from './fields';
 
 const { FormRender } = FormGroup;
 
-function Edit({ detail, form, visible, ...others }) {
-  const { getFieldDecorator } = form;
-
+function Edit({ detail, visible, ...others }) {
+  const [form] = FormGroup.useForm();
   const modalProps = {
     visible,
     form,
@@ -18,11 +16,11 @@ function Edit({ detail, form, visible, ...others }) {
   };
   return (
     <HModal {...modalProps}>
-      <FormGroup getFieldDecorator={getFieldDecorator} required>
+      <FormGroup form={form} required>
         {editFields.map(field => <FormRender key={field.key} field={field} data={detail} />)}
       </FormGroup>
     </HModal>
   );
 }
 
-export default Form.create()(Edit);
+export default Edit;

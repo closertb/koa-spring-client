@@ -1,9 +1,9 @@
 import React, { createRef } from 'react';
 import { connect } from 'dva';
-import { Input, Button } from 'antd';
+import { Button } from 'antd';
 import { bind } from 'antd-doddle/decorator';
-import FormGroup from '../../components/FormGroup';
-import { fields } from './fields'
+import { FormGroup } from 'antd-doddle';
+import { fields } from './fields';
 import './index.less';
 
 const { FormRender } = FormGroup;
@@ -90,24 +90,6 @@ class Login extends React.Component {
           <h3 className="h-login-logo">系统登录</h3>
           <FormGroup {...formItemLayout} ref={this.formRef} datas={this.state}>
             {fields.map(field => <FormRender key={field.key} field={field} />)}
-            {/* <FormRender
-              name="name"
-              label="账号"
-              initialValue={name}
-              rules={[{ required: true, message: 'Please input your Username!' }]}
-            >
-              <Input placeholder="Username" />
-            </FormRender>
-            <FormRender
-              name="pwd"
-              label="密码"
-              rules={[{ required: true, message: 'Please input your Password!' }]}
-            >
-              <Input
-                type="password"
-                placeholder="Password"
-              />
-            </FormRender> */}
             <div style={{ textAlign: 'center' }}>
               <Button loading={loading.login} style={{ width: '100%' }} type="primary" onClick={this.handleLogin}>
                 登录

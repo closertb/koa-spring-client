@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { FormGroup } from 'antd-doddle';
-import { form, bind } from 'antd-doddle/decorator';
 import { Button } from 'antd';
 
 const { FormRender } = FormGroup;
@@ -22,30 +21,25 @@ export const editFields = [{
 }];
 
 
-@form
-export default class Edit extends React.PureComponent {
-  @bind
-  handleSubmit() {
-    const { handle, form: { validateFields } } = this.props;
-    validateFields((error, { file, ...values }) => {
-      if (error) {
-        return;
-      }
-      console.log('val', values);
+function Edit(props) {
+  const { handle } = props;
+  const [form] = FormGroup.useForm();
+  const handleSubmit = useCallback(() => {
+    form.validateFields().then(({ file, ...values }) => {
       handle({
         file: file[0],
         ...values
       });
     });
-  }
+  });
 
-  render() {
-    const { form: { getFieldDecorator } } = this.props;
-    return (
-      <FormGroup getFieldDecorator={getFieldDecorator} required>
-        {editFields.map(field => <FormRender key={field.key} field={field} data={{ tag: 'tag', name: 'name' }} />)}
-        <Button type="primary" onClick={this.handleSubmit}>提交</Button>
-      </FormGroup>
-    );
-  }
+  return (
+    <FormGroup form={form} datas={{ tag: 'tag', name: 'name' }} required>
+      {editFields.map(field => <FormRender key={field.key} field={field} />)}
+      <Button type="primary" onClick={handleSubmit}>提交</Button>
+    </FormGroup>
+  );
 }
+
+
+export default React.memo(Edit);
