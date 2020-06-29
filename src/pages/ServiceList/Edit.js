@@ -16,8 +16,8 @@ function Edit({ detail, visible, ...others }) {
   };
   return (
     <HModal {...modalProps}>
-      <FormGroup form={form} required>
-        {editFields.map(field => <FormRender key={field.key} field={field} data={detail} />)}
+      <FormGroup form={form} datas={detail} required>
+        {editFields.map(field => <FormRender key={field.key} field={field} />)}
       </FormGroup>
     </HModal>
   );
