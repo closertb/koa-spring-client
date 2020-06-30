@@ -8,7 +8,6 @@ import Edit from './Edit';
 
 @connect(({ rule }) => ({ ...rule }), dispatch => ({
   onSearch(payload) {
-    console.log('sw', payload);
     dispatch({ type: 'rule/getList', payload });
   },
   onSave(payload) {
