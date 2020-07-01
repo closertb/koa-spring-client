@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'antd';
 import { connect } from 'dva';
 import { bind } from 'antd-doddle/decorator';
-import SearchPage from '../../components/SearchPage';
+import { Searchpage } from 'antd-doddle';
 import { fields, searchFields } from './fields';
 import Edit from './Edit';
 
@@ -100,13 +100,13 @@ export default class Root extends React.PureComponent {
       onSearch,
       searchProps,
       tableProps,
-      ExtraBtns: (<Button type="primary" onClick={this.handleEdit}>添加</Button>)
+      extraBtn: (<Button type="primary" onClick={this.handleEdit}>添加</Button>)
     };
 
     return (
-      <SearchPage {...pageProps}>
+      <Searchpage {...pageProps}>
         {visible && <Edit {...editProps} />}
-      </SearchPage>
+      </Searchpage>
     );
   }
 }

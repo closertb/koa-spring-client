@@ -21,7 +21,7 @@ export const formItemLayout = {
 
 const back = 'https://doddle.oss-cn-beijing.aliyuncs.com/images/back.jpg';
 
-const initData = { pwd: '123456' };
+const initData = { name: 'dom', pwd: '123456' };
 @connect(({ login }) => ({ ...login }), dispatch => ({
   login(payload) {
     dispatch({ type: 'login/login', payload });
@@ -35,16 +35,11 @@ class Login extends React.Component {
     this.formRef = createRef();
   }
 
-  componentDidMount() {
-    this.setState({ name: 'doddle' });
-  }
-
   @bind
   handleLogin() {
     const { login } = this.props;
     const validate = this.formRef.current.validateFields;
     validate().then((values) => {
-      console.log('values', values);
       login(values);
     });
 /*       fetch('http://localhost:4001/user/login', {
@@ -66,9 +61,6 @@ class Login extends React.Component {
   render() {
     const { siteName, loading } = this.props;
 
-    const { name } = this.state;
-
-    console.log('name', name);
     return (
       <div
         className="h-login-frame-viewport"
