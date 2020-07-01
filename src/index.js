@@ -2,8 +2,9 @@ import dva from 'dva';
 import hook from '@doddle/dva';
 import { setPaginationParam } from 'antd-doddle';
 import { setApp } from 'antd-doddle/decorator';
+import 'dayjs/locale/zh-cn';
 import 'antd/dist/antd.css';
-import 'antd-doddle/dist/index.css';
+// import 'antd-doddle/dist/index.css';
 import './configs/extendTypes';
 import './style/index.less';
 

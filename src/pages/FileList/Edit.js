@@ -1,13 +1,13 @@
 import React, { createRef } from 'react';
 import { Button, Row, Spin, message } from 'antd';
-import { formRender } from 'antd-doddle';
 import copy from 'copy-to-clipboard';
-import { bind, form } from 'antd-doddle/decorator';
+import { bind } from 'antd-doddle/decorator';
+import { FormGroup } from 'antd-doddle';
 import { editFields } from './fields';
 import { oss } from './model';
 
+const { FormRender } = FormGroup;
 
-let FormRender;
 function getRadomName() {
   const randomCode = Math.floor(Math.random() * 26) + 65;
   return `${Date.now()}-${String.fromCharCode(randomCode)}`;
@@ -27,16 +27,14 @@ const clipStyle = {
 };
 
 
-@form
 export default class Edit extends React.PureComponent {
   constructor(props) {
     super(props);
-    const { form: { getFieldDecorator } } = props;
     this.clipRef = createRef();
+    this.form = createRef();
     this.state = {
       spinning: false,
     };
-    FormRender = formRender({ getFieldDecorator, withWrap: true, require: true });
   }
 
   async handleUpload(file, type) {
@@ -67,14 +65,11 @@ export default class Edit extends React.PureComponent {
 
   @bind
   handleAction() {
-    const { form: { validateFields } } = this.props;
-    validateFields((err, { file, type }) => {
-      if (err) {
-        return;
-      }
-      const target = file[0];
-      this.handlUpload(target, type);
-    });
+    this.form.validateFields()
+      .then(({ file, type }) => {
+        const target = file[0];
+        this.handlUpload(target, type);
+      });
   }
 
   @bind
@@ -115,18 +110,20 @@ export default class Edit extends React.PureComponent {
     return (
       <div className="search-form">
         <Spin spinning={spinning} tip="文件上传中">
-          <Row>
-            {editFields.map(field => <FormRender key={field.key} {...{ field, data, wrapProps: { span: 8 } }} />)}
-            <Button type="primary" className="mt-5" onClick={this.handleAction}>{isUpdate ? '修改' : '添加' }</Button>
-            <Button className="ml-20" onClick={onReset}>重置</Button>
-          </Row>
-          <div
-            onPaste={this.handlePaste}
-            style={clipStyle}
-            ref={this.clipRef}
-          >
-              请粘贴图片
-          </div>
+          <FormGroup ref={this.form} {...{ withWrap: true, required: true }}>
+            <Row>
+              {editFields.map(field => <FormRender key={field.key} {...{ field, data, wrapProps: { span: 8 } }} />)}
+              <Button type="primary" className="mt-5" onClick={this.handleAction}>{isUpdate ? '修改' : '添加' }</Button>
+              <Button className="ml-20" onClick={onReset}>重置</Button>
+            </Row>
+            <div
+              onPaste={this.handlePaste}
+              style={clipStyle}
+              ref={this.clipRef}
+            >
+                请粘贴图片
+            </div>
+          </FormGroup>
         </Spin>
       </div>);
   }

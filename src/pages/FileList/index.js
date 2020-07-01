@@ -80,6 +80,7 @@ export default class Root extends React.PureComponent {
     const searchProps = {
       fields: searchFields,
       search,
+      timeFormat: true,
       onSearch,
     };
     return (

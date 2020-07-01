@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import { connect } from 'dva';
-import { Form, Button } from 'antd';
-import { formRender } from 'antd-doddle';
+import { Button } from 'antd';
 import { bind } from 'antd-doddle/decorator';
+import { FormGroup } from 'antd-doddle';
 import { fields } from './fields';
 import './index.less';
 
-let FormRender;
+const { FormRender } = FormGroup;
 // 表单通用格式
 export const formItemLayout = {
   labelCol: {
@@ -31,21 +31,17 @@ const initData = { name: 'dom', pwd: '123456' };
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
-    const { getFieldDecorator } = props.form;
-    FormRender = formRender({
-      getFieldDecorator,
-      formItemLayout
-    });
+    this.state = initData;
+    this.formRef = createRef();
   }
 
   @bind
   handleLogin() {
-    const { login, form: { validateFields } } = this.props;
-    validateFields((errors, values) => {
-      if (errors) {
-        return;
-      }
+    const { login } = this.props;
+    const validate = this.formRef.current.validateFields;
+    validate().then((values) => {
+      login(values);
+    });
 /*       fetch('http://localhost:4001/user/login', {
         method: 'POST',
         body: 'name=dom&pwd=123456',
@@ -60,8 +56,6 @@ class Login extends React.Component {
       })
         .then(data => console.log('json:', data))
         .catch(error => console.error('error:', error)); */
-      login(values);
-    });
   }
 
   render() {
@@ -86,18 +80,18 @@ class Login extends React.Component {
         </div>
         <div className="h-login-form">
           <h3 className="h-login-logo">系统登录</h3>
-          <Form>
-            {fields.map(field => <FormRender key={field.key} field={field} data={initData} />)}
+          <FormGroup {...formItemLayout} ref={this.formRef} datas={this.state}>
+            {fields.map(field => <FormRender key={field.key} field={field} />)}
             <div style={{ textAlign: 'center' }}>
               <Button loading={loading.login} style={{ width: '100%' }} type="primary" onClick={this.handleLogin}>
                 登录
               </Button>
             </div>
-          </Form>
+          </FormGroup>
         </div>
       </div>
     );
   }
 }
 
-export default Form.create({})(Login);
+export default Login;
