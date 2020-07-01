@@ -36,6 +36,6 @@
 		"react-router-dom": "^4.2.2"
 	},
 	"webpack": {
-		"useAnalyse": true
+		"useAnalyse": false
 	}
 }
