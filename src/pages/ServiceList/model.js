@@ -25,7 +25,6 @@ export default {
   },
   effects: {
     * getList({ payload }, { call, update }) {
-      console.log('ans', payload);
       const { datas, total } = yield call(services.getList, payload);
       yield update({ datas, total });
     },

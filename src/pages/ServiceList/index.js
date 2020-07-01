@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'antd';
 import { connect } from 'dva';
 import { bind } from 'antd-doddle/decorator';
-import { Searchpage } from 'antd-doddle';
+import { SearchPage } from 'antd-doddle';
 import { fields, searchFields } from './fields';
 import Edit from './Edit';
 
@@ -104,9 +104,9 @@ export default class Root extends React.PureComponent {
     };
 
     return (
-      <Searchpage {...pageProps}>
+      <SearchPage {...pageProps}>
         {visible && <Edit {...editProps} />}
-      </Searchpage>
+      </SearchPage>
     );
   }
 }
