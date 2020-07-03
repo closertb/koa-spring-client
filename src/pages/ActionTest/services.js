@@ -26,3 +26,7 @@ export function updateCache() {
 export function clearCache(param) {
   return postAdmin('/arcticle/clearCache', param);
 }
+
+export function refreshCache() {
+  return postAdmin('/arcticle/getListAll', {});
+}

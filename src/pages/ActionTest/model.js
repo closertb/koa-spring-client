@@ -1,5 +1,5 @@
 import cookie from 'js-cookie';
-import { login, upload, updateCache, clearCache } from './services';
+import { login, upload, refreshCache, updateCache, clearCache } from './services';
 
 export default ({
   namespace: 'index',
@@ -24,6 +24,9 @@ export default ({
     },
     * updateCache({ payload }, { call }) {
       yield call(updateCache, payload);
+    },
+    * refreshCache({ payload }, { call }) {
+      yield call(refreshCache, payload);
     },
     * clearCache({ payload }, { call }) {
       yield call(clearCache, payload);

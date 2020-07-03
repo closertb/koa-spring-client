@@ -25,7 +25,7 @@ export default class Index extends React.PureComponent {
   }
 
   render() {
-    const { error, loading, _add, _subtract, _upload, _updateCache, count, user } = this.props;
+    const { error, loading, _add, _subtract, _upload, _updateCache, _refreshCache, count, user } = this.props;
     if (error) {
       return <div>{error.msg}</div>;
     }
@@ -62,6 +62,9 @@ export default class Index extends React.PureComponent {
               <div>
                 <Button onClick={this.clearCache}>清除缓存</Button>
                 <Button onClick={_updateCache} type="primary">更新缓存</Button>
+              </div>
+              <div>
+                <Button onClick={_refreshCache} type="primary">刷新列表</Button>
               </div>
             </div>
             <div>
