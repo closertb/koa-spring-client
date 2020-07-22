@@ -19,10 +19,14 @@ export function upload(param) {
   });
 }
 
-export function updateCache() {
-  return postAdmin('/arcticle/updateCache', {});
+export function updateCache(param) {
+  return postAdmin('/arcticle/updateCache', param);
 }
 
 export function clearCache(param) {
   return postAdmin('/arcticle/clearCache', param);
+}
+
+export function readCacheCount(param) {
+  return postAdmin('/arcticle/readCacheCount', param);
 }

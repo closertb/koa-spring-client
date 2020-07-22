@@ -1,31 +1,38 @@
 /* eslint-disable react/button-has-type */
 import React from 'react';
-import { Input, Button } from 'antd';
+import { Button, Select } from 'antd';
 import { model } from 'antd-doddle/decorator';
 import style from './index.less';
 import Edit from './edit';
 
+const { Option } = Select;
+
+const keyMaps = [{
+  value: 'Blog-*',
+  label: '文章分页'
+}, {
+  value: 'BlogDetail-*',
+  label: '文章详情'
+}, {
+  value: 'BlogAllList-key',
+  label: '文章列表'
+}];
+
 @model('index')
 export default class Index extends React.PureComponent {
-  state = { pattern: 'Blog-*' }
-
   login = () => {
     const { _login } = this.props;
     _login({ name: 'dom', pwd: 'dom456' });
   }
 
-  clearCache = () => {
-    const { pattern } = this.state;
-    const { _clearCache } = this.props;
-    _clearCache({ pattern });
-  }
-
-  handleChange = (e = {}) => {
-    e.target && e.target.value && this.setState({ pattern: e.target.value });
+  handleChange = (pattern) => {
+    const { _readCacheCount } = this.props;
+    pattern && _readCacheCount({ pattern });
   }
 
   render() {
-    const { error, loading, _add, _subtract, _upload, _updateCache, count, user } = this.props;
+    const { error, loading, cacheCount, _updateCache, _clearCache, pattern,
+      _add, _subtract, _upload, count, user } = this.props;
     if (error) {
       return <div>{error.msg}</div>;
     }
@@ -58,14 +65,16 @@ export default class Index extends React.PureComponent {
           <h3>操作缓存</h3>
           <div>
             <div>
-              <Input onChange={this.handleChange} />
+              <Select style={{ width: '80%' }} value={pattern} onChange={this.handleChange} allowClear>
+                {keyMaps.map(({ label, value }) => <Option key={value} value={value}>{label}</Option>)}
+              </Select>
               <div>
-                <Button onClick={this.clearCache}>清除缓存</Button>
+                <Button onClick={_clearCache}>清除缓存</Button>
                 <Button onClick={_updateCache} type="primary">更新缓存</Button>
               </div>
             </div>
             <div>
-              {loading.updateCache ? <span>请求中</span> : <span>空闲</span>}
+              {loading.updateCache ? <span>请求中</span> : <span>{cacheCount}</span>}
             </div>
           </div>
         </div>
