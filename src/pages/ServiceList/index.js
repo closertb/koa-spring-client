@@ -1,15 +1,14 @@
 import React from 'react';
 import { Button } from 'antd';
 import { connect } from 'dva';
-import { EnhanceTable, WithSearch } from 'antd-doddle';
 import { bind } from 'antd-doddle/decorator';
+import { SearchPage } from 'antd-doddle';
 import { fields, searchFields } from './fields';
 import Edit from './Edit';
 
 @connect(({ rule }) => ({ ...rule }), dispatch => ({
   onSearch(payload) {
-    dispatch({ type: 'rule/updateSearch', payload });
-    dispatch({ type: 'rule/getList' });
+    dispatch({ type: 'rule/getList', payload });
   },
   onSave(payload) {
     dispatch({ type: 'rule/save', payload });
@@ -74,42 +73,40 @@ export default class Root extends React.PureComponent {
   }
 
   render() {
-    const { loading, datas, total, search, onSearch } = this.props;
+    const { loading, datas, total, onSearch } = this.props;
     const { visible, detail } = this.state;
     const tableProps = {
-      search,
       datas,
       fields,
-      loading: loading.getList,
-      onSearch,
       total,
+      loading: loading.getList,
       extraFields: this.getExtraFields()
     };
+
     const searchProps = {
       fields: searchFields,
-      search,
-      onSearch,
     };
 
     const editProps = {
       onOk: this.onOk,
       visible,
       detail,
+      id: detail.id,
       title: detail.id ? '修改' : '新增',
-      confirmLoading: loading.update || loading.save || false,
+      confirmLoading: loading.save || loading.update,
+    };
+
+    const pageProps = {
+      onSearch,
+      searchProps,
+      tableProps,
+      extraBtn: (<Button type="primary" onClick={this.handleEdit}>添加</Button>)
     };
 
     return (
-      <div>
-        <Button type="primary" title="确认删除？" onClick={() => this.handleEdit()}>
-          添加
-        </Button>
-        <WithSearch {...searchProps} />
-        <div className="pageContent">
-          <EnhanceTable {...tableProps} />
-        </div>
+      <SearchPage {...pageProps}>
         {visible && <Edit {...editProps} />}
-      </div>
+      </SearchPage>
     );
   }
 }

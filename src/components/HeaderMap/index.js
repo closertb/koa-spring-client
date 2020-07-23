@@ -1,19 +1,17 @@
 import React from 'react';
-import { Icon, Layout } from 'antd';
+import { Layout } from 'antd';
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+
 import HeaderBtns from './HeaderBtns';
 import styles from './index.less';
 
 const { Header } = Layout;
 
-function HeaderMap({ collapsed, onToggle, username, onLogout }) {
+function HeaderMap({ collapsed, username, onToggle, onLogout }) {
   return (
     <Header className={styles.header}>
       <HeaderBtns username={username} onLogout={onLogout} />
-      <Icon
-        className="trigger"
-        type={collapsed ? 'menu-unfold' : 'menu-fold'}
-        onClick={onToggle}
-      />
+      {collapsed ? <MenuFoldOutlined onClick={onToggle} /> : <MenuUnfoldOutlined onClick={onToggle} />}
     </Header>
   );
 }

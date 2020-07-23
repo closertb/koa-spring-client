@@ -65,7 +65,12 @@ export default class Index extends React.PureComponent {
           <h3>操作缓存</h3>
           <div>
             <div>
-              <Select style={{ width: '80%' }} value={pattern} onChange={this.handleChange} allowClear>
+              <Select
+                tyle={{ width: '80%', marginTop: '10px' }}
+                value={pattern}
+                onChange={this.handleChange}
+                allowClear
+              >
                 {keyMaps.map(({ label, value }) => <Option key={value} value={value}>{label}</Option>)}
               </Select>
               <div>

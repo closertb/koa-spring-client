@@ -1,6 +1,12 @@
 export const searchFields = [{
   key: 'type',
   name: '文件分类',
+}, {
+  key: 'time',
+  name: '筛选时间',
+  type: 'rangePicker',
+  startKey: 'startTime',
+  endKey: 'endTime',
 }];
 
 export const fields = [{
@@ -23,7 +29,7 @@ export const editFields = [{
   key: 'type',
   name: '文件分类',
   // eslint-disable-next-line no-bitwise
-  disable: ({ type = '' }) => Boolean(~type.indexOf('/'))
+  disabled: ({ type = '' }) => Boolean(~type.indexOf('/'))
 }, {
   key: 'file',
   name: '文件',

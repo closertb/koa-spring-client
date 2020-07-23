@@ -17,16 +17,15 @@ export default {
     loading: {},
   },
   subscriptions: {
-    setup({ listen, dispatch }) {
+    setup({ listen }) {
       listen(Paths.RULE, () => {
-        dispatch({ type: 'getList' });
+        // dispatch({ type: 'getList' });
       }, false); // 将beforeEnterListener方法禁用
     },
   },
   effects: {
-    * getList({ payload }, { call, update, select }) {
-      const { search } = yield select('rule');
-      const { datas, total } = yield call(services.getList, search);
+    * getList({ payload }, { call, update }) {
+      const { datas, total } = yield call(services.getList, payload);
       yield update({ datas, total });
     },
     * save({ payload }, { call, put }) {

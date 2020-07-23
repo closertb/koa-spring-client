@@ -1,5 +1,6 @@
 import { message } from 'antd';
 import cookie from 'js-cookie';
+import dayjs from 'dayjs';
 import MyOss from './oss';
 import * as services from './services';
 
@@ -8,6 +9,7 @@ export const oss = new MyOss();
 const initialSearch = {
   pn: 1,
   ps: 10,
+  time: [dayjs(), dayjs().endOf('day')],
   type: 'notes'
 };
 
@@ -39,6 +41,7 @@ export default {
     },
     * getList({ payload }, { select, call, update }) {
       const { search } = yield select('file');
+      console.log('search', search);
       const result = yield call(oss.getList, search.type);
       if (!result) {
         message.error('获取失败');

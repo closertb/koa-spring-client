@@ -1,6 +1,8 @@
 import React from 'react';
-import { Upload, Icon, Modal, Button } from 'antd';
+import { Upload, Modal, Button } from 'antd';
 import { bind } from 'antd-doddle/decorator';
+import { PlusOutlined, UploadOutlined, InboxOutlined } from '@ant-design/icons';
+
 import style from './index.less';
 
 const kb = 1024 * 1024;
@@ -8,12 +10,12 @@ const { Dragger } = Upload;
 
 const uploadButton = (type = 'picture-card') => type === 'picture-card' ? (
   <div>
-    <Icon type="plus" />
+    <PlusOutlined />
     <div className="ant-upload-text">上传</div>
   </div>
 ) : (
   <Button>
-    <Icon type="upload" />
+    <UploadOutlined />
     选择文件
   </Button>
 );
@@ -97,7 +99,7 @@ class UploadImg extends React.PureComponent {
           </Upload> :
           <Dragger {...props} multiple>
             <p className="ant-upload-drag-icon">
-              <Icon type="inbox" />
+              <InboxOutlined />
             </p>
             <p className="ant-upload-text">单击或拖拽上传</p>
           </Dragger>

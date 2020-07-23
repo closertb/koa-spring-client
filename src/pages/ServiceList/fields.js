@@ -40,7 +40,7 @@ export const editFields = [{
   name: '场景',
   enums: sceneEnums,
   type: 'select',
-  disable: detail => detail.scene_code === 'special'
+  disabled: detail => detail.scene_code === 'special'
 }, {
   key: 'param_code',
   name: 'Code',
