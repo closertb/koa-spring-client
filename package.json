@@ -8,7 +8,8 @@
 		"dev": "doddle-build dev",
 		"qa": "doddle-build qa",
 		"pub": "doddle-build pub",
-		"start": "doddle-build start --port 8906"
+		"start": "doddle-build start --port 8906",
+		"do": "babel md5.js --out-file ./dist/md5.js"
 	},
 	"repository": {
 		"type": "git",
