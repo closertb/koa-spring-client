@@ -1,11 +1,14 @@
 import cookie from 'js-cookie';
-import { login, upload, refreshCache, updateCache, clearCache } from './services';
+import { login, upload, readCacheCount, updateCache, clearCache } from './services';
 
 export default ({
   namespace: 'index',
+  pattern: 'Blog-*',
   state: {
     count: 0,
+    pattern: 'Blog-*',
     user: {},
+    cacheCount: 0,
     loading: {
       login: false
     }
@@ -22,14 +25,19 @@ export default ({
     * upload({ payload }, { call }) {
       yield call(upload, payload);
     },
-    * updateCache({ payload }, { call }) {
-      yield call(updateCache, payload);
+    * updateCache({ payload }, { select, call, put }) {
+      const { pattern } = yield select('index');
+      yield call(updateCache, { pattern });
+      yield put({ type: 'readCacheCount', payload: { pattern } });
     },
-    * refreshCache({ payload }, { call }) {
-      yield call(refreshCache, payload);
+    * clearCache({ payload }, { select, call, put }) {
+      const { pattern } = yield select('index');
+      yield call(clearCache, { pattern });
+      yield put({ type: 'readCacheCount', payload: { pattern } });
     },
-    * clearCache({ payload }, { call }) {
-      yield call(clearCache, payload);
+    * readCacheCount({ payload: { pattern } = { pattern: 'Blog-*' } }, { call, update }) {
+      const { total } = yield call(readCacheCount, { pattern });
+      yield update({ cacheCount: total, pattern });
     },
     * login({ payload }, { call, update }) {
       const user = yield call(login, payload);
@@ -45,7 +53,7 @@ export default ({
   subscriptions: {
     setup({ dispatch, listen }) {
       listen('/action', () => {
-        dispatch({ type: 'add' });
+        dispatch({ type: 'readCacheCount' });
       });
     }
   },
@@ -55,6 +63,6 @@ export default ({
         ...state,
         count: payload.count
       };
-    }
+    },
   }
 });
