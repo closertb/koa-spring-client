@@ -20,6 +20,14 @@ export const editFields = [{
   listType: 'text',
 }];
 
+export const detailFields = [{
+  key: 'number',
+  name: '编号',
+}, {
+  key: 'cursor',
+  name: '光标',
+}];
+
 
 function Edit(props) {
   const { handle } = props;
@@ -43,3 +51,24 @@ function Edit(props) {
 
 
 export default React.memo(Edit);
+
+
+function EditDetail(props) {
+  const { handle, loading } = props;
+  const [form] = FormGroup.useForm();
+  const handleSubmit = useCallback(() => {
+    form.validateFields().then((values) => {
+      handle(values);
+    });
+  });
+
+  return (
+    <FormGroup form={form} datas={{ tag: 'tag', name: 'name' }} style={{ marginTop: 20 }} required>
+      {detailFields.map(field => <FormRender key={field.key} field={field} />)}
+      <Button loading={loading} type="primary" onClick={handleSubmit}>更新</Button>
+    </FormGroup>
+  );
+}
+
+
+export const UpdateDetail = React.memo(EditDetail);

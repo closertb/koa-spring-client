@@ -3,7 +3,7 @@ import React from 'react';
 import { Button, Select } from 'antd';
 import { model } from 'antd-doddle/decorator';
 import style from './index.less';
-import Edit from './edit';
+import Edit, { UpdateDetail } from './edit';
 
 const { Option } = Select;
 
@@ -31,7 +31,7 @@ export default class Index extends React.PureComponent {
   }
 
   render() {
-    const { error, loading, cacheCount, _updateCache, _clearCache, pattern,
+    const { error, loading, cacheCount, _updateCache, _clearCache, _updateDetail, pattern,
       _add, _subtract, _upload, count, user } = this.props;
     if (error) {
       return <div>{error.msg}</div>;
@@ -81,6 +81,12 @@ export default class Index extends React.PureComponent {
             <div>
               {loading.updateCache ? <span>请求中</span> : <span>{cacheCount}</span>}
             </div>
+          </div>
+        </div>
+        <div className="block">
+          <h3>更新详情缓存</h3>
+          <div>
+            <UpdateDetail handle={_updateDetail} loading={loading.updateDetail} />
           </div>
         </div>
         <div className="block">

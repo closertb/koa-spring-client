@@ -1,5 +1,5 @@
 import cookie from 'js-cookie';
-import { login, upload, readCacheCount, updateCache, clearCache } from './services';
+import { login, upload, readCacheCount, updateCache, updateDetail, clearCache } from './services';
 
 export default ({
   namespace: 'index',
@@ -10,7 +10,8 @@ export default ({
     user: {},
     cacheCount: 0,
     loading: {
-      login: false
+      login: false,
+      updateDetail: false,
     }
   },
   effects: {
@@ -29,6 +30,9 @@ export default ({
       const { pattern } = yield select('index');
       yield call(updateCache, { pattern });
       yield put({ type: 'readCacheCount', payload: { pattern } });
+    },
+    * updateDetail({ payload }, { call }) {
+      yield call(updateDetail, payload);
     },
     * clearCache({ payload }, { select, call, put }) {
       const { pattern } = yield select('index');

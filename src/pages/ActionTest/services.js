@@ -30,3 +30,7 @@ export function clearCache(param) {
 export function readCacheCount(param) {
   return postAdmin('/arcticle/readCacheCount', param);
 }
+
+export function updateDetail(param) {
+  return postAdmin('/arcticle/updateDetail', param);
+}
