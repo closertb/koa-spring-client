@@ -21,6 +21,7 @@ jobs:
       uses: closertb/deploy-static-action@master
       with:
         name: 'doddle'
+        type: 'static'
         token: ${{ secrets.Deploy_Token }}
         requestUrl: 'http://deploy.closertb.site/operate/deploy'
         dist: 'dist'
