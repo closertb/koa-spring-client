@@ -29,11 +29,12 @@
 		"@doddle/http": "^2.2.4",
 		"ali-oss": "^6.1.1",
 		"antd": "^4.4.0",
-		"antd-doddle": "^2.0.3",
+		"antd-doddle": "^2.1.0",
 		"copy-to-clipboard": "^3.3.1",
 		"dva": "^2.4.1",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
+		"react-json-view": "^1.19.1",
 		"react-router-dom": "^4.2.2"
 	},
 	"webpack": {

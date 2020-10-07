@@ -1,5 +1,5 @@
 import cookie from 'js-cookie';
-import { login, upload, readCacheCount, updateCache, updateDetail, clearCache } from './services';
+import { login, upload, readCacheCount, updateCache, updateDetail, getDetailList, clearCache } from './services';
 
 export default ({
   namespace: 'index',
@@ -9,8 +9,11 @@ export default ({
     pattern: 'Blog-*',
     user: {},
     cacheCount: 0,
+    pargraphList: [],
+    keyValue: {},
     loading: {
       login: false,
+      getKeyValue: false,
       updateDetail: false,
     }
   },
@@ -33,6 +36,21 @@ export default ({
     },
     * updateDetail({ payload }, { call }) {
       yield call(updateDetail, payload);
+    },
+    * getDetailList({ payload }, { call, update }) {
+      const res = yield call(getDetailList, payload);
+      const data = res.data?.repository?.issues?.edges;
+      yield update({ pargraphList: ([{ label: '自定义', value: 'self' }])
+        .concat((data || []).map(({ cursor, node: { number, title } }, index) => ({
+          label: title,
+          value: `${index + 1}`,
+          cursor,
+          number,
+        }))) });
+    },
+    * getKeyValue({ payload }, { call, update }) {
+      const data = yield call(getDetailList, payload);
+      yield update({ keyValue: data });
     },
     * clearCache({ payload }, { select, call, put }) {
       const { pattern } = yield select('index');
@@ -58,6 +76,7 @@ export default ({
     setup({ dispatch, listen }) {
       listen('/action', () => {
         dispatch({ type: 'readCacheCount' });
+        dispatch({ type: 'getDetailList' });
       });
     }
   },

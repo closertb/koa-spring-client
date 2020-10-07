@@ -34,3 +34,7 @@ export function readCacheCount(param) {
 export function updateDetail(param) {
   return postAdmin('/arcticle/updateDetail', param);
 }
+
+export function getDetailList(param) {
+  return postAdmin('/arcticle/getKeyValue', param);
+}

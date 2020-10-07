@@ -1,18 +1,26 @@
 .Action {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
   :global {
-    .block {
-      width: 350px;
-      margin: 10px 0 0 30px;
-      padding: 20px 10px;
-      border: 1px solid #999;
-      border-radius: 5px;
-      text-align: center;
+    .action-block {
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      .block {
+        width: 350px;
+        margin: 10px 0 0 30px;
+        padding: 20px 10px;
+        border: 1px solid #999;
+        border-radius: 5px;
+        text-align: center;
+      }
+      button {
+        margin: 10px;
+      }
     }
-    button {
-      margin: 10px;
+    .react-json-view {
+      margin: 20px 25px;
+      min-height: 100px;
+      border: 1px solid #e8e8e8;
+      border-radius: 5px;
     }
   }
 }
