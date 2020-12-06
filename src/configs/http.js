@@ -27,6 +27,9 @@ function responseDataValidator({ _response = {} }, next) {
 export default Http.create({
   servers: getServer(),
   contentKey: 'content',
+  bodyParam: {
+    // credentials: 'include'
+  },
   query() {
     const token = cookie.get('token');
     const uid = cookie.get('uid');
