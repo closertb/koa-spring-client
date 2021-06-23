@@ -1,4 +1,4 @@
-export const SITE_NAME = 'doddle antd';
+export const SITE_NAME = '邀请函后台';
 
 export const APP_CLIENT_ID = 336;
 
