@@ -4,6 +4,12 @@ export default {
     path: '/home',
     component: 'Home'
   },
+  inviteList: {
+    name: '参会人员',
+    path: '/inviteList',
+    icon: 'sketch',
+    component: 'InviteList'
+  },
   action: {
     name: 'ActionTest',
     path: '/action',
@@ -27,5 +33,5 @@ export default {
     path: '/ruleHook',
     icon: 'sketch',
     component: 'RuleHook'
-  }
+  },
 };

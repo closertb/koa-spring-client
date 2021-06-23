@@ -1,7 +1,7 @@
 const servers = {
   local: {
     mock: '//server.closertb.site/client',
-    admin: '//deploy.closertb.site', //
+    admin: 'http://localhost:8906/api', //
   },
   production: {
     mock: '//server.closertb.site/client',
