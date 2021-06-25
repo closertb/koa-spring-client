@@ -1,19 +1,15 @@
-import dva from 'dva';
 import hook from '@doddle/dva';
 import { setPaginationParam } from 'antd-doddle';
 import { setApp } from 'antd-doddle/decorator';
 import 'dayjs/locale/zh-cn';
 import 'antd/dist/antd.css';
+import { app } from './configs/constants';
 // import 'antd-doddle/dist/index.css';
 import './configs/extendTypes';
 import './style/index.less';
 
 // Initialize
-const app = dva({
-  onError(e) {
-    console.log(e);
-  }
-});
+
 
 setPaginationParam({
   PN: 'pn',

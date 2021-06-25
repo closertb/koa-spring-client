@@ -1,7 +1,7 @@
 module.exports = () => ({
   proxy: {
     '/api': {
-      target: 'http://deploy.closertb.site',
+      target: 'http://localhost:3000', // 'http://deploy.closertb.site',
       pathRewrite: { '^/api': '' },
       changeOrigin: true,
       secure: false

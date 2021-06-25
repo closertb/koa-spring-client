@@ -1,6 +1,6 @@
 import { routerRedux } from 'dva/router';
 import cookie from 'js-cookie';
-import { Paths, SITE_NAME } from '../../configs/constants';
+import { Paths, SITE_NAME, compileParam } from '../../configs/constants';
 import { login } from './services';
 
 export default {
@@ -13,12 +13,13 @@ export default {
 
   effects: {
     * login({ payload }, { call, put }) {
-      const { id, token, name, ossKey } = yield call(login, payload);
+      const { id, token, name, ossKey, menus } = yield call(login, payload);
 
       const expires = { expires: 1 };
       cookie.set('uid', id, expires);
       cookie.set('username', name, expires);
       cookie.set('token', token, expires);
+      cookie.set('auth', compileParam(`menu:${menus}`), expires);
       ossKey && cookie.set('ossKey', ossKey, expires);
       cookie.remove('lastPath');
       yield put(routerRedux.push('/home'));
